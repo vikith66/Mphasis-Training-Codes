@@ -1,0 +1,38 @@
+package com.example.forward;
+
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+//@WebServlet("/CurrentDate")
+public class CurrentDate extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor. 
+     */
+    public CurrentDate() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Calendar calender = new GregorianCalendar();
+		String date = calender.getTime().toString();
+		
+		String message = "Current Date is: " + date;
+		request.setAttribute("message", message);
+		
+		RequestDispatcher disp = request.getRequestDispatcher("DisplayServlet");
+		disp.forward(request, response);
+	}
+}
