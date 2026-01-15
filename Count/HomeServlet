@@ -1,0 +1,44 @@
+package com.example.context;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+
+//@WebServlet("/HomeServlet")
+public class HomeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private ServletContext context;
+	private String initCount;
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		context = config.getServletContext();
+		initCount = context.getInitParameter("initCount");
+		System.out.println(initCount);
+	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String countValue;
+		if(context.getAttribute("count") != null) {
+			countValue = context.getAttribute("count").toString();
+		} else {
+			countValue = initCount;
+		}
+		int count = Integer.parseInt(countValue);
+		count++;
+		context.setAttribute("count", count);
+		PrintWriter out  = response.getWriter();
+		response.setContentType("text/html");
+		out.print("<html><body>");
+		out.print("<h1> Welcome! Site count updated to " + count +"</h1>" );
+		out.print("</body></html>");
+	}
+}
