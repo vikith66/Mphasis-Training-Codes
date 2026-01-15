@@ -1,0 +1,51 @@
+package com.example.config;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebInitParam;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class DatabaseServlet
+ */
+//@WebServlet(
+//		urlPatterns = { "/DatabaseServlet" }, 
+//		initParams = { 
+//				@WebInitParam(name = "databaseURL", value = "jdbc:mysql://localhost/mydb"), 
+//				@WebInitParam(name = "databaseUserName", value = "root"), 
+//				@WebInitParam(name = "databasePassword", value = "root"), 
+//				@WebInitParam(name = "masterTableName", value = "Student_Master")
+//		})
+public class DatabaseServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String databaseURL;
+	private String databaseUserName;
+	private String databasePassword;
+	private String masterTableName;
+
+	public void init(ServletConfig config) throws ServletException {
+		databaseURL = config.getInitParameter("databaseURL");
+		databaseUserName = config.getInitParameter("databaseUserName");
+		databasePassword = config.getInitParameter("databasePassword");
+		masterTableName = config.getInitParameter("masterTableName");
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.print("<html><body><table border = 1>");
+		out.print("<tr><td>DataBase URL</td><td>" + databaseURL + "</td></tr>");
+		out.print("<tr><td>DataBase UserName</td><td>" + databaseUserName + "</td></tr>");
+		out.print("<tr><td>Password</td><td>" + databasePassword + "</td></tr>");
+		out.print("<tr><td>Master Table</td><td>" + masterTableName + "</td></tr>");
+		out.print("</table></body</html>");
+	}
+
+}
