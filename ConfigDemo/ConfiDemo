@@ -1,0 +1,38 @@
+NEW PACKAGE -> NEW SERVLET -> CLICK ADD -> ADD NAME AND MAIL -> ADD INIT... CREATE 
+
+
+package com.example.config;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebInitParam;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+//@WebServlet(
+//		urlPatterns = { "/confDemo" }, 
+//		initParams = { 
+//				@WebInitParam(name = "adminemail", value = "admin@mphasis.com")
+//		})
+public class confDemo extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String adminemail;
+	public void init(ServletConfig config) throws ServletException {
+		adminemail = config.getInitParameter("adminemail");
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.print("<html><body>");
+		out.print("<h1>The Admin Email is " + adminemail + "</h1>");
+		out.print("</body></html>");
+	}
+
+}
