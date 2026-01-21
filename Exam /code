@@ -30,3 +30,20 @@ public class Main {
         }
     }
 }
+for (int i = 0; i < num; i++) {
+
+    System.out.print("Enter Employee ID: ");
+    int id = sc.nextInt();
+
+    System.out.print("Enter Employee Name: ");
+    String name = sc.next();
+
+    System.out.print("Enter Employee Salary: ");
+    double salary = sc.nextDouble();
+
+    System.out.print("Enter Employee Department: ");
+    String department = sc.next();
+
+    empMap.put(id, new Employee(id, name, salary, department));
+    System.out.println();
+}
