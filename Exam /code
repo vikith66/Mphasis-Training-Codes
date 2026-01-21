@@ -21,47 +21,12 @@ class Employee {
 
 public class Main {
     public static void main(String[] args) {
-
-        // STEP A: Store employees in Map (ID → Employee)
         Map<Integer, Employee> empMap = new LinkedHashMap<>();
-
-        empMap.put(101, new Employee(101, "Rahul", 40000, "IT"));
-        empMap.put(102, new Employee(102, "Amit", 25000, "HR"));
-        empMap.put(103, new Employee(103, "Neha", 35000, "IT"));
-        empMap.put(104, new Employee(104, "Rahul", 50000, "IT"));
-        empMap.put(105, new Employee(105, "Suresh", 30000, "IT"));
-        empMap.put(103, new Employee(103, "Neha", 45000, "IT")); // replaces old ID 103
-
-        // STEP B + C: Filter & store into Set (unique names, insertion order)
-        Set<Employee> filteredSet = new LinkedHashSet<>();
-
-        Set<String> nameTracker = new HashSet<>();
-
-        for (Employee e : empMap.values()) {
-            if (e.salary > 30000 && e.department.equals("IT")) {
-                if (!nameTracker.contains(e.name)) {
-                    filteredSet.add(e);
-                    nameTracker.add(e.name);
-                }
-            }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of Employee");
+        int num = sc.nextInt();
+        for(int i = 0; i < num; i++){
+            
         }
-
-        // STEP D: Sort by salary DESC, name ASC
-        List<Employee> sortedList = new ArrayList<>(filteredSet);
-
-        Collections.sort(sortedList, (e1, e2) -> {
-            int salaryCompare = Double.compare(e2.salary, e1.salary); // DESC
-            if (salaryCompare != 0) {
-                return salaryCompare;
-            }
-            return e1.name.compareTo(e2.name); // ASC
-        });
-
-        // STEP E: Display only names + count
-        for (Employee e : sortedList) {
-            System.out.println(e.name);
-        }
-
-        System.out.println("Total Employees: " + sortedList.size());
     }
 }
